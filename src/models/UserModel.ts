@@ -2,7 +2,7 @@ import { model as mongooseCreateModel, Schema } from 'mongoose';
 import { IUser } from '../interfaces/IUser';
 import MongoModel from './MongoModel';
 
-const carsMongooseSchema = new Schema<IUser>({
+const UsersMongooseSchema = new Schema<IUser>({
   id: String,
   name: String,
   email: String,
@@ -11,7 +11,7 @@ const carsMongooseSchema = new Schema<IUser>({
 }, { versionKey: false });
 
 class Acessories extends MongoModel<IUser> {
-  constructor(model = mongooseCreateModel('Users', carsMongooseSchema)) {
+  constructor(model = mongooseCreateModel('Users', UsersMongooseSchema)) {
     super(model);
   }
 }
