@@ -12,3 +12,7 @@
 12 - Install mongoose
 13 - Install dotenv
 14 - Create Mongoose connection
+
+Start
+
+01 - Create interfaces
