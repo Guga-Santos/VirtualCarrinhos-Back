@@ -1,8 +1,10 @@
-1 - npm init
-2 - git init
-3 - Install Typescript, node, express and types
-4 - Build Dockerfile
-5 - Build Docker-compose
-6 - Install ts-node and ts-node-dev
-7 - Create src, src/app and src/index
-8 - Create server
+01 - npm init
+02 - git init
+03 - Install Typescript, node, express and types
+04 - Build Dockerfile
+05 - Build Docker-compose
+06 - Install ts-node and ts-node-dev
+07 - Create src, src/app and src/index
+08 - Create server
+09 - Create tsconfig.json
+10 - Install Eslint
