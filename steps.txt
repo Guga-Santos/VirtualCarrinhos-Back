@@ -1,0 +1,8 @@
+1 - npm init
+2 - git init
+3 - Install Typescript, node, express and types
+4 - Build Dockerfile
+5 - Build Docker-compose
+6 - Install ts-node and ts-node-dev
+7 - Create src, src/app and src/index
+8 - Create server
