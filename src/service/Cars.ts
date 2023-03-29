@@ -32,10 +32,10 @@ class CarsService implements IService<ICar> {
   }
 
   public async update(_id: string, obj: Partial<ICar>): Promise<ICar | null> {
-    const car = await this._car.update(_id, obj);
-    if (!car) throw new Error(ErrorTypes.EntityNotFound);
+    const updated = await this._car.update(_id, obj);
+    if (!updated) throw new Error(ErrorTypes.EntityNotFound);
 
-    return car;
+    return updated;
   }
 
   public async delete(_id: string): Promise<ICar | null> {
