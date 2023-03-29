@@ -1,7 +1,7 @@
-import { ErrorTypes } from "../errors/catalog";
-import { IModel } from "../interfaces/IModel";
-import IService from "../interfaces/IService";
-import { IUser, UserZodSchema } from "../interfaces/IUser";
+import { ErrorTypes } from '../errors/catalog';
+import { IModel } from '../interfaces/IModel';
+import IService from '../interfaces/IService';
+import { IUser, UserZodSchema } from '../interfaces/IUser';
 
 class UsersService implements IService<IUser> {
   private _user:IModel<IUser>;
