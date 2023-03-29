@@ -8,3 +8,4 @@
 08 - Create server
 09 - Create tsconfig.json
 10 - Install Eslint
+11 - Config eslintrc.json
