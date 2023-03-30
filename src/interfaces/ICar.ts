@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const CarZodSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   name: z.string().min(5),
   code: z.string(),
   description: z.string(),
