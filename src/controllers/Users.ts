@@ -19,9 +19,9 @@ export default class CarsController {
 
   public async readOne(req: Request, res: Response) {
     const { id } = req.params;
-    const car = await this._service.readOne(id);
+    const user = await this._service.readOne(id);
 
-    return res.status(200).json(car);
+    return res.status(200).json(user);
   }
 
   public async update(req: Request, res: Response) {
