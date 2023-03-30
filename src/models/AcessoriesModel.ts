@@ -3,7 +3,6 @@ import { IAccessories } from '../interfaces/IAccessories';
 import MongoModel from './MongoModel';
 
 const AcessoriesMongooseSchema = new Schema<IAccessories>({
-  id: String,
   name: String,
   image: String,
 }, { versionKey: false });
