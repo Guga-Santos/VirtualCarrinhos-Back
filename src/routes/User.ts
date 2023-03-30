@@ -16,3 +16,5 @@ route
   .get('/users', (req, res) => userController.read(req, res))
   .put('/users/:id', (req, res) => userController.update(req, res))
   .delete('/users/:id', (req, res) => userController.delete(req, res));
+
+export default route;
