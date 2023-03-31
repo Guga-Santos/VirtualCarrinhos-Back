@@ -37,6 +37,6 @@ export default class CarsController {
     const { id } = req.params;
 
     await this._service.delete(id);
-    return res.status(204).end('Successfully deleted');
+    return res.status(204);
   }
 }

@@ -7,7 +7,9 @@ import { expect } from "chai";
 import * as sinon from 'sinon';
 import {
   carMock,
-  carMockWithId
+  carMockWithId,
+  updateCarMock,
+  updatedCarMock
 } from "../../mocks/carMocks";
 
 describe('Cars Controller Suite Tests', () => {
@@ -22,16 +24,19 @@ describe('Cars Controller Suite Tests', () => {
     sinon.stub(carService, 'create').resolves(carMock);
     sinon.stub(carService, 'read').resolves([carMockWithId]);
     sinon.stub(carService, 'readOne').resolves(carMockWithId);
+    sinon.stub(carService, 'update').resolves(updatedCarMock);
+    sinon.stub(carService, 'delete').resolves(carMockWithId);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
+    res.end = sinon.stub().returns(res);
   })
 
   after(() => {
     sinon.restore();
   })
 
-  describe('Create Cars', () => {
+  describe('Create Car', () => {
     it('On success', async() => {
       req.body = carMock;
       await carController.create(req, res);
@@ -56,13 +61,37 @@ describe('Cars Controller Suite Tests', () => {
     it('On failure', async () => {})
   })
 
-  describe('ReadOne Cars', () => {
+  describe('ReadOne Car', () => {
     it('On success', async () => {
       req.params = { id: carMockWithId._id };
       await carController.readOne(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(carMockWithId)).to.be.true;
+    })
+
+    it('On failure', async () => {})
+  })
+
+  describe('Update Car', () => {
+    it('On success', async () => {
+      req.params = { id: carMockWithId._id };
+      req.body = updateCarMock;
+      await carController.update(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(201)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(updatedCarMock)).to.be.true;
+    })
+
+    it('On failure', async () => {})
+  })
+
+  describe('Delete Car', () => {
+    it('On success', async () => {
+      req.params = { id: carMockWithId._id };
+      await carController.delete(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
     })
 
     it('On failure', async () => {})
