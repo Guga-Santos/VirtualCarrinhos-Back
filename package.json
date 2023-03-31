@@ -47,5 +47,8 @@
     "express-async-errors": "^3.1.1",
     "mongoose": "^7.0.3",
     "zod": "^3.21.4"
-  }
+  },
+  "nyc": {
+    "exclude": ["src/models/MongoModel.ts", "src/tests"]
+ }
 }

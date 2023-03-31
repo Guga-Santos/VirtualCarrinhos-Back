@@ -1,7 +1,9 @@
 module.exports = {
   "extends": "@istanbuljs/nyc-config-typescript",
-  "excludes": [
-    "src/models/MongoModel.ts",
+  "include": [
+    "src/models",
+    "src/services",
+    "src/controllers"
   ],
   "reporter": [
     "text",
