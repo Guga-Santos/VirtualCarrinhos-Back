@@ -30,6 +30,10 @@ describe('Acessories Service Suite Tests', () => {
     sinon.stub(acessoryModel, 'update')
       .onCall(0).resolves(updatedAcessoryMock)
       .onCall(1).resolves(null);
+
+    sinon.stub(acessoryModel, 'delete')
+      .onCall(0).resolves(acessoryMockWithId)
+      .onCall(1).resolves(null);
   })
   
   after(() => {
@@ -103,4 +107,24 @@ describe('Acessories Service Suite Tests', () => {
       expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
 		});
 	});
+
+  describe('Delete Acessory', () => {
+    it('On success', async() => {
+      const deletedCar = await acessoryService.delete(acessoryMockWithId._id);
+			expect(deletedCar).to.be.deep.equal(acessoryMockWithId);
+
+    })
+
+    it('On failure', async() => {
+      let error;
+			try {
+				await acessoryService.delete(acessoryMockWithId._id);
+			} catch (err:any) {
+       error = err
+			}
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+		});
+  });
 })
