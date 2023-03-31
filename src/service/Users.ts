@@ -20,7 +20,7 @@ class UsersService implements IService<IUser> {
   public async read(): Promise<IUser[] | null> {
     const list = this._user.read();
 
-    return list ?? [];
+    return list;
   }
 
   public async readOne(_id: string): Promise<IUser> {

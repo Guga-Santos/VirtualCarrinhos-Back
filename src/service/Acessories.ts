@@ -20,7 +20,7 @@ class AcessoriesService implements IService<IAccessories> {
   public async read(): Promise<IAccessories[] | null> {
     const list = await this._acessory.read();
 
-    return list ?? [];
+    return list;
   }
 
   public async readOne(_id: string): Promise<IAccessories> {

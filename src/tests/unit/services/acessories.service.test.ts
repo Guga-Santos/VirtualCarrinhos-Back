@@ -66,7 +66,7 @@ describe('Acessories Service Suite Tests', () => {
     
     it('On failure', async () => {
       const list = await acessoryService.read();
-      expect(list).to.be.deep.equal([]);
+      expect(list).to.be.deep.equal(null);
     })
   })
 
