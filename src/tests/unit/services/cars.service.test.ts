@@ -29,6 +29,10 @@ describe('Cars Service Suite Tests', () => {
       sinon.stub(carModel, 'update')
       .onCall(0).resolves(updatedCarMock) 
 			.onCall(1).resolves(null); 
+
+      sinon.stub(carModel, 'delete')
+      .onCall(0).resolves(carMockWithId) 
+			.onCall(1).resolves(null);
     
   })
 
@@ -106,4 +110,23 @@ describe('Cars Service Suite Tests', () => {
 		});
 	});
 
-})
+  describe('Delete Car', () => {
+    it('On success', async() => {
+      const deletedCar = await carService.delete(carMockWithId._id);
+			expect(deletedCar).to.be.deep.equal(carMockWithId);
+
+    })
+
+    it('On failure', async() => {
+      let error;
+			try {
+				await carService.delete(carMockWithId._id);
+			} catch (err:any) {
+       error = err
+			}
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+		});
+    })
+  })
