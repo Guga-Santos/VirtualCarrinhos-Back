@@ -45,9 +45,6 @@ describe('Cars Controller Suite Tests', () => {
       expect((res.json as sinon.SinonStub).calledWith(carMock)).to.be.true;
     })
 
-    it('On failure', async() => {
-
-    })
   })
 
   describe('Read all Cars', () => {
@@ -58,7 +55,6 @@ describe('Cars Controller Suite Tests', () => {
       expect((res.json as sinon.SinonStub).calledWith([carMockWithId])).to.be.true;
     })
 
-    it('On failure', async () => {})
   })
 
   describe('ReadOne Car', () => {
@@ -70,7 +66,6 @@ describe('Cars Controller Suite Tests', () => {
       expect((res.json as sinon.SinonStub).calledWith(carMockWithId)).to.be.true;
     })
 
-    it('On failure', async () => {})
   })
 
   describe('Update Car', () => {
@@ -83,7 +78,6 @@ describe('Cars Controller Suite Tests', () => {
       expect((res.json as sinon.SinonStub).calledWith(updatedCarMock)).to.be.true;
     })
 
-    it('On failure', async () => {})
   })
 
   describe('Delete Car', () => {
@@ -94,6 +88,5 @@ describe('Cars Controller Suite Tests', () => {
       expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
     })
 
-    it('On failure', async () => {})
   })
 })
