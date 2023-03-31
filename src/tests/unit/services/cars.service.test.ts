@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ZodError } from 'zod';
+import { ErrorTypes } from '../../../errors/catalog';
 // import { ErrorTypes } from '../../../errors/catalog';
 import Cars from '../../../models/CarsModel';
 import CarsService from '../../../service/Cars';
@@ -18,6 +19,10 @@ describe('Cars Service Suite Tests', () => {
 
     sinon.stub(carModel, 'read')
       .onCall(0).resolves([carMockWithId]) 
+			.onCall(1).resolves(null); 
+
+      sinon.stub(carModel, 'readOne')
+      .onCall(0).resolves(carMockWithId) 
 			.onCall(1).resolves(null); 
     
   })
@@ -55,4 +60,24 @@ describe('Cars Service Suite Tests', () => {
 			expect(newCar).to.be.deep.equal(null);
     })
   })
+
+  describe('ReadOne Car', () => {
+		it('On success', async () => {
+			const newCar = await carService.readOne(carMockWithId._id);
+
+			expect(newCar).to.be.deep.equal(carMockWithId);
+		});
+
+		it('On failure', async () => {
+    let error;
+			try {
+				await carService.readOne(carMockWithId._id);
+			} catch (err:any) {
+       error = err
+			}
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+		});
+	});
 })
