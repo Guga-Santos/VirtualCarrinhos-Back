@@ -5,6 +5,7 @@ import MongoModel from './MongoModel';
 const carsMongooseSchema = new Schema<ICar>({
   name: String,
   code: String,
+  description: String,
   mesures: String,
   wheels: String,
   image: String,
