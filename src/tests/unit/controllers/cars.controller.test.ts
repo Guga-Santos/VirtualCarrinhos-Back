@@ -5,7 +5,10 @@ import CarsService from "../../../service/Cars";
 
 import { expect } from "chai";
 import * as sinon from 'sinon';
-import { carMock } from "../../mocks/carMocks";
+import {
+  carMock,
+  carMockWithId
+} from "../../mocks/carMocks";
 
 describe('Cars Controller Suite Tests', () => {
   const carModel = new Cars();
@@ -17,6 +20,7 @@ describe('Cars Controller Suite Tests', () => {
 
   before(() => {
     sinon.stub(carService, 'create').resolves(carMock);
+    sinon.stub(carService, 'read').resolves([carMockWithId])
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -38,5 +42,16 @@ describe('Cars Controller Suite Tests', () => {
     it('On failure', async() => {
 
     })
+  })
+
+  describe('Read all Cars', () => {
+    it('On success', async () => {
+      await carController.read(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith([carMockWithId])).to.be.true;
+    })
+
+    it('On failure', async () => {})
   })
 })
