@@ -60,21 +60,21 @@ describe('Cars Service Suite Tests', () => {
 
   describe('Read All Cars', () => {
     it('On success', async() => {
-      const newCar = await carService.read();
-			expect(newCar).to.be.deep.equal([carMockWithId]);
+      const list = await carService.read();
+			expect(list).to.be.deep.equal([carMockWithId]);
     })
 
     it('On failure', async() => {
-      const newCar = await carService.read();
-			expect(newCar).to.be.deep.equal(null);
+      const list = await carService.read();
+			expect(list).to.be.deep.equal(null);
     })
   })
 
   describe('ReadOne Car', () => {
 		it('On success', async () => {
-			const newCar = await carService.readOne(carMockWithId._id);
+			const car = await carService.readOne(carMockWithId._id);
 
-			expect(newCar).to.be.deep.equal(carMockWithId);
+			expect(car).to.be.deep.equal(carMockWithId);
 		});
 
 		it('On failure', async () => {
@@ -92,9 +92,9 @@ describe('Cars Service Suite Tests', () => {
 
   describe('Update Car', () => {
 		it('On success', async () => {
-			const newCar = await carService.update(carMockWithId._id, updateCarMock);
+			const car = await carService.update(carMockWithId._id, updateCarMock);
 
-			expect(newCar).to.be.deep.equal(updatedCarMock);
+			expect(car).to.be.deep.equal(updatedCarMock);
 		});
 
 		it('On failure', async () => {

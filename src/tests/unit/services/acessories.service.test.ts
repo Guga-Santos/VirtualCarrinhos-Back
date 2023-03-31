@@ -5,8 +5,12 @@ import { ErrorTypes } from '../../../errors/catalog';
 
 import Acessories from "../../../models/AcessoriesModel";
 import AcessoriesService from "../../../service/Acessories";
-import { acessoryMock, acessoryMockWithId } from '../../mocks/acessoryMocks';
-import { carMockWithId } from '../../mocks/carMocks';
+import {
+  acessoryMock,
+  acessoryMockWithId,
+  updateAcessoryMock,
+  updatedAcessoryMock
+} from '../../mocks/acessoryMocks';
 
 describe('Acessories Service Suite Tests', () => {
   const acessoryModel = new Acessories();
@@ -21,6 +25,10 @@ describe('Acessories Service Suite Tests', () => {
 
     sinon.stub(acessoryModel, 'readOne')
       .onCall(0).resolves(acessoryMockWithId)
+      .onCall(1).resolves(null);
+
+    sinon.stub(acessoryModel, 'update')
+      .onCall(0).resolves(updatedAcessoryMock)
       .onCall(1).resolves(null);
   })
   
@@ -67,7 +75,7 @@ describe('Acessories Service Suite Tests', () => {
     it('On failure', async () => {
       let error;
       try {
-        await acessoryService.readOne(carMockWithId._id);
+        await acessoryService.readOne(acessoryMockWithId._id);
       } catch  (err: any) {
         error = err
       }
@@ -75,4 +83,24 @@ describe('Acessories Service Suite Tests', () => {
       expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
     })
   })
+
+  describe('Update Acessory', () => {
+		it('On success', async () => {
+			const acessory = await acessoryService.update(acessoryMockWithId._id, updateAcessoryMock);
+
+			expect(acessory).to.be.deep.equal(updatedAcessoryMock);
+		});
+
+		it('On failure', async () => {
+    let error;
+			try {
+				await acessoryService.update(acessoryMockWithId._id, updateAcessoryMock);
+			} catch (err:any) {
+       error = err
+			}
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+		});
+	});
 })
