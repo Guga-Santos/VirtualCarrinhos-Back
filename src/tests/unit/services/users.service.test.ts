@@ -5,7 +5,7 @@ import { expect } from "chai";
 import * as sinon from 'sinon';
 import { ZodError } from "zod";
 import { ErrorTypes } from "../../../errors/catalog";
-import { userMock, userMockWithId } from "../../mocks/userMocks";
+import { updatedUserMock, updateUserMock, userMock, userMockWithId } from "../../mocks/userMocks";
 
 
 describe('Users Service Suite Tests', () => {
@@ -22,6 +22,11 @@ describe('Users Service Suite Tests', () => {
     sinon.stub(userModel, 'readOne')
     .onCall(0).resolves(userMockWithId)
     .onCall(1).resolves(null);
+
+    sinon.stub(userModel, 'update')
+    .onCall(0).resolves(updatedUserMock)
+    .onCall(1).resolves(null);
+    
   })
 
   after(() => {
@@ -67,6 +72,24 @@ describe('Users Service Suite Tests', () => {
       let error;
       try {
       await userService.readOne(userMockWithId._id);
+      } catch (err: any){
+        error = err;
+      }
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+    })
+  })
+
+  describe('Update User', () => {
+    it('On success', async () => {
+      const user = await userService.update(userMockWithId._id, updateUserMock);
+      expect(user).to.be.deep.equal(updatedUserMock);
+    })
+    it('On failure', async () => {
+      let error;
+      try {
+      await userService.update(userMockWithId._id, updateUserMock);
       } catch (err: any){
         error = err;
       }
