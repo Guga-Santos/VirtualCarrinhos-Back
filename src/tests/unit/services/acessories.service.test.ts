@@ -1,10 +1,12 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ZodError } from 'zod';
+import { ErrorTypes } from '../../../errors/catalog';
 
 import Acessories from "../../../models/AcessoriesModel";
 import AcessoriesService from "../../../service/Acessories";
 import { acessoryMock, acessoryMockWithId } from '../../mocks/acessoryMocks';
+import { carMockWithId } from '../../mocks/carMocks';
 
 describe('Acessories Service Suite Tests', () => {
   const acessoryModel = new Acessories();
@@ -15,6 +17,10 @@ describe('Acessories Service Suite Tests', () => {
     
     sinon.stub(acessoryModel, 'read')
       .onCall(0).resolves([acessoryMockWithId])
+      .onCall(1).resolves(null);
+
+    sinon.stub(acessoryModel, 'readOne')
+      .onCall(0).resolves(acessoryMockWithId)
       .onCall(1).resolves(null);
   })
   
@@ -40,14 +46,33 @@ describe('Acessories Service Suite Tests', () => {
     })
   })
 
-  describe('Reall All Acerrories', () => {
+  describe('Read All Acerrories', () => {
     it('On success', async () => {
       const list = await acessoryService.read()
       expect(list).to.be.deep.equal([acessoryMockWithId]);
     })
+    
     it('On failure', async () => {
       const list = await acessoryService.read();
       expect(list).to.be.deep.equal([]);
+    })
+  })
+
+  describe('ReadOne Acessory', () => {
+    it('On success', async () => {
+      const acessory = await acessoryService.readOne(acessoryMockWithId._id);
+      expect(acessory).to.be.deep.equal(acessoryMockWithId);
+    })
+
+    it('On failure', async () => {
+      let error;
+      try {
+        await acessoryService.readOne(carMockWithId._id);
+      } catch  (err: any) {
+        error = err
+      }
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
     })
   })
 })
