@@ -80,4 +80,5 @@ describe('Cars Service Suite Tests', () => {
       expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
 		});
 	});
+
 })
