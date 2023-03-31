@@ -1,4 +1,4 @@
-export interface IModel<T> {
+export interface IModel<T extends object> {
   create(obj: T): Promise<T>,
   read(): Promise<T[] | null>,
   readOne(_id: string): Promise<T | null>,
