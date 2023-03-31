@@ -13,7 +13,7 @@ describe('Acessories Service Suite Tests', () => {
   before(() => {
     sinon.stub(acessoryModel, 'create').resolves(acessoryMockWithId);
     
-    sinon.stub(acessoryMock, 'read')
+    sinon.stub(acessoryModel, 'read')
       .onCall(0).resolves([acessoryMockWithId])
       .onCall(1).resolves(null);
   })
@@ -37,6 +37,17 @@ describe('Acessories Service Suite Tests', () => {
         error = err
       }
       expect(error).to.be.instanceOf(ZodError);
+    })
+  })
+
+  describe('Reall All Acerrories', () => {
+    it('On success', async () => {
+      const list = await acessoryService.read()
+      expect(list).to.be.deep.equal([acessoryMockWithId]);
+    })
+    it('On failure', async () => {
+      const list = await acessoryService.read();
+      expect(list).to.be.deep.equal([]);
     })
   })
 })
