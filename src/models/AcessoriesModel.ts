@@ -4,6 +4,7 @@ import MongoModel from './MongoModel';
 
 const AcessoriesMongooseSchema = new Schema<IAccessories>({
   name: String,
+  description: String,
   image: String,
 }, { versionKey: false });
 
