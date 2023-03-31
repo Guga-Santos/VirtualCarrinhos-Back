@@ -26,6 +26,10 @@ describe('Users Service Suite Tests', () => {
     sinon.stub(userModel, 'update')
     .onCall(0).resolves(updatedUserMock)
     .onCall(1).resolves(null);
+
+    sinon.stub(userModel, 'delete')
+    .onCall(0).resolves(userMockWithId)
+    .onCall(1).resolves(null);
     
   })
 
@@ -90,6 +94,24 @@ describe('Users Service Suite Tests', () => {
       let error;
       try {
       await userService.update(userMockWithId._id, updateUserMock);
+      } catch (err: any){
+        error = err;
+      }
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+    })
+  })
+
+  describe('Delete User', () => {
+    it('On success', async () => {
+      const user = await userService.delete(userMockWithId._id);
+      expect(user).to.be.deep.equal(userMockWithId);
+    })
+    it('On failure', async () => {
+      let error;
+      try {
+      await userService.delete(userMockWithId._id);
       } catch (err: any){
         error = err;
       }
