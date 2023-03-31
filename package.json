@@ -7,6 +7,7 @@
     "dev": "tsnd src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:dev": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --exit -t 60000",
+    "test:watch": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --watch",
     "test:cov": "nyc npm run test:dev",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
