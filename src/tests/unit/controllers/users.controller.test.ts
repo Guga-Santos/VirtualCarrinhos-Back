@@ -71,5 +71,13 @@ describe('Users Controller Suite Tests', () => {
     })
   })
 
+  describe('Delete User', () => {
+    it('On success', async () => {
+      req.params = { id: userMockWithId._id };
+      await userController.delete(req, res);
 
+      expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
+    })
+
+  })
 })
