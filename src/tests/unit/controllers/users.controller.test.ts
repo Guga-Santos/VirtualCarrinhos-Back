@@ -18,6 +18,7 @@ describe('Users Controller Suite Tests', () => {
   before(() => {
     sinon.stub(userService, 'create').resolves(userMock);
     sinon.stub(userService, 'read').resolves([userMockWithId]);
+    sinon.stub(userService, 'readOne').resolves(userMockWithId);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -44,6 +45,16 @@ describe('Users Controller Suite Tests', () => {
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith([userMockWithId])).to.be.true;
+    })
+  })
+
+  describe('ReadOne User', () => {
+    it('On success', async () => {
+      req.params = { id: userMockWithId._id }
+      await userController.readOne(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(userMockWithId)).to.be.true;
     })
   })
 })
