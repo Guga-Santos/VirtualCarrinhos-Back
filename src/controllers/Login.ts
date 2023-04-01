@@ -6,7 +6,7 @@ export default class LoginController {
 
   public async Login(req: Request, res: Response) {
     const { body } = req;
-    const user = await this._service.findOne(body.email);
+    const user = await this._service.Login(body);
 
     return res.status(200).json(user);
   }

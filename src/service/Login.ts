@@ -1,3 +1,4 @@
+import { ILoginBody } from '../interfaces/ILoginBody';
 import Users from '../models/UserModel';
 
 class LoginService {
@@ -7,8 +8,8 @@ class LoginService {
     this._user = model;
   }
 
-  public async findOne(email: string) {
-    const user = await this._user.findOne(email);
+  public async Login(body: ILoginBody) {
+    const user = await this._user.findOne(body.email);
     return user;
   }
 }
