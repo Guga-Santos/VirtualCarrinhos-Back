@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CarsController from "../../../controllers/Acessories";
+import CarsController from "../../../controllers/Cars";
 import Cars from "../../../models/CarsModel";
 import CarsService from "../../../service/Cars";
 
