@@ -1,4 +1,5 @@
-export interface Ivalidate {
+
+export interface IValidate {
   status: number;
   message: string;
 }
