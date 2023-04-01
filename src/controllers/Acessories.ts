@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { IAccessories } from '../interfaces/IAccessories';
 import IService from '../interfaces/IService';
 
-export default class CarsController {
+export default class AcessoriesController {
   constructor(private _service: IService<IAccessories>) {}
 
   public async create(req: Request, res: Response) {
