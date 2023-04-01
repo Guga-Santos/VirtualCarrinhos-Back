@@ -14,6 +14,10 @@ class Users extends MongoModel<IUser> {
   constructor(model = mongooseCreateModel('Users', UsersMongooseSchema)) {
     super(model);
   }
+
+  public async findOne(email: string): Promise<IUser | null> {
+    return this._model.findOne({ email });
+  }
 }
 
 export default Users;
