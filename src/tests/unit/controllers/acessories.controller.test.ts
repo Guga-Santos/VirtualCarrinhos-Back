@@ -50,4 +50,14 @@ describe('Acessories Controller Suite Tests', () => {
 
   })
 
+  describe('ReadOne Acessory', () => {
+    it('On success', async () => {
+      req.params = { id: acessoryMockWithId._id };
+      await acessoryController.readOne(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(acessoryMockWithId)).to.be.true;
+    })
+
+  })
 })
