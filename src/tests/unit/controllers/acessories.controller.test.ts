@@ -77,5 +77,13 @@ describe('Acessories Controller Suite Tests', () => {
 
   })
 
+  describe('Delete Car', () => {
+    it('On success', async () => {
+      req.params = { id: acessoryMockWithId._id };
+      await acessoryController.delete(req, res);
 
+      expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
+    })
+
+  })
 })
