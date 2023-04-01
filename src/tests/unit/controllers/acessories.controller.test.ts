@@ -5,7 +5,7 @@ import AcessoriesService from "../../../service/Acessories";
 
 import { expect } from "chai";
 import * as sinon from 'sinon';
-import { acessoryMock, acessoryMockWithId } from "../../mocks/acessoryMocks";
+import { acessoryMock, acessoryMockWithId, updateAcessoryMock, updatedAcessoryMock } from "../../mocks/acessoryMocks";
 import { carMock } from "../../mocks/carMocks";
 
 
@@ -21,9 +21,13 @@ describe('Acessories Controller Suite Tests', () => {
     sinon.stub(acessoryService, 'create').resolves(acessoryMock);
     sinon.stub(acessoryService, 'read').resolves([acessoryMockWithId]);
     sinon.stub(acessoryService, 'readOne').resolves(acessoryMockWithId);
+    sinon.stub(acessoryService, 'update').resolves(updatedAcessoryMock);
+    sinon.stub(acessoryService, 'delete').resolves(acessoryMockWithId);
+
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
+    res.end = sinon.stub().returns(res);
   })
 
   after(() => {
@@ -60,4 +64,18 @@ describe('Acessories Controller Suite Tests', () => {
     })
 
   })
+
+  describe('Update Acessory', () => {
+    it('On success', async () => {
+      req.params = { id: acessoryMockWithId._id };
+      req.body = updateAcessoryMock;
+      await acessoryController.update(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(201)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(updatedAcessoryMock)).to.be.true;
+    })
+
+  })
+
+
 })
