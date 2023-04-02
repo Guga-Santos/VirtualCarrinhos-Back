@@ -45,10 +45,14 @@
   "dependencies": {
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "9.0.0",
     "mongoose": "^7.0.3",
     "zod": "^3.21.4"
   },
   "nyc": {
-    "exclude": ["src/models/MongoModel.ts", "src/tests"]
- }
+    "exclude": [
+      "src/models/MongoModel.ts",
+      "src/tests"
+    ]
+  }
 }
