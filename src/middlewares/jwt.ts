@@ -10,9 +10,7 @@ export default class JWT {
     this._secret = secret;
   }
   public async createToken(obj: IUser) {
-    const { id } = obj;
-
-    const token = jwt.sign({ data: { userId: id } }, this._secret, {
+    const token = jwt.sign({ data: { user: obj } }, this._secret, {
       expiresIn: '7d',
       algorithm: 'HS256',
     });
