@@ -12,7 +12,7 @@ class UsersService implements IService<IUser> {
 
   public async create(obj: unknown): Promise<IUser> {
     const parsed = UserZodSchema.safeParse(obj);
-    if (!parsed.success) throw parsed.error;
+    if (!parsed.success) throw new Error(ErrorTypes.FieldsMissing);
 
     return this._user.create(parsed.data);
   }

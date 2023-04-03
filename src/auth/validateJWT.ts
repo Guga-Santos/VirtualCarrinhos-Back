@@ -11,11 +11,11 @@ interface JwtPayload {
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization');
-
+  
   if (!token) {
     return res.status(401).json({ error: 'Token não encontrado' });
   }
-
+  
   try {
     const jwt = new JWT();
     const decoded = await jwt.decodeToken(token) as JwtPayload;

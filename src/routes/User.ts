@@ -16,7 +16,7 @@ route
   .get('/users/:id', (req, res) => userController.readOne(req, res))
   .get('/users', (req, res, next) => {
     validateJWT(req, res, next);
-    userController.read(req, res);
+    // userController.read(req, res);
   })
   .put('/users/:id', (req, res) => userController.update(req, res))
   .delete('/users/:id', (req, res) => userController.delete(req, res));
