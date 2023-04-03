@@ -8,7 +8,8 @@ describe('User Model Suite Tests', () => {
 
   before(() => {
     sinon.stub(users._model, 'findOne')
-      .onCall(0).resolves(userMockWithId);
+      .onCall(0).resolves(userMockWithId)
+      .onCall(1).resolves(null);
   })
 
   after(() => {
@@ -19,6 +20,12 @@ describe('User Model Suite Tests', () => {
       const user = await users.findOne(userMockWithId.email)
 
       expect(user).to.be.deep.equal(userMockWithId);
+    })
+
+    it('On failure', async () => {
+      const user = await users.findOne(userMockWithId.email)
+
+      expect(user).to.be.deep.equal(null);
     })
   })
 })
