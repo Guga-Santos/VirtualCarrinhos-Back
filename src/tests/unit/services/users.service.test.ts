@@ -3,7 +3,6 @@ import UsersService from "../../../service/Users";
 
 import { expect } from "chai";
 import * as sinon from 'sinon';
-import { ZodError } from "zod";
 import { ErrorTypes } from "../../../errors/catalog";
 import { updatedUserMock, updateUserMock, userMock, userMockWithId } from "../../mocks/userMocks";
 
@@ -47,11 +46,11 @@ describe('Users Service Suite Tests', () => {
       let error;
       try {
         await userService.create({});
-      } catch (err) {
+      } catch (err: any) {
         error = err;
       }
-
-      expect(error).to.be.instanceOf(ZodError);
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.FieldsMissing);
     })
   })
 
