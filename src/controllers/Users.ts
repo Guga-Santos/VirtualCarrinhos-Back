@@ -1,30 +1,35 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import validateJWT from '../auth/validateJWT';
 import IService from '../interfaces/IService';
 import { IUser } from '../interfaces/IUser';
 
 export default class UsersController {
   constructor(private _service: IService<IUser>) {}
 
-  public async create(req: Request, res: Response) {
+  public async create(req: Request, res: Response, next: NextFunction) {
+    await validateJWT(req, res, next);
     const { body } = req;
     const newUser = await this._service.create(body);
     return res.status(201).json(newUser);
   }
 
-  public async read(req: Request, res: Response) {
+  public async read(req: Request, res: Response, next: NextFunction) {
+    await validateJWT(req, res, next);
     const list = await this._service.read();
 
     return res.status(200).json(list);
   }
 
-  public async readOne(req: Request, res: Response) {
+  public async readOne(req: Request, res: Response, next: NextFunction) {
+    await validateJWT(req, res, next);
     const { id } = req.params;
     const user = await this._service.readOne(id);
 
     return res.status(200).json(user);
   }
 
-  public async update(req: Request, res: Response) {
+  public async update(req: Request, res: Response, next: NextFunction) {
+    await validateJWT(req, res, next);
     const { id } = req.params;
     const { body } = req;
 
@@ -33,7 +38,8 @@ export default class UsersController {
     return res.status(201).json(updated);
   }
 
-  public async delete(req: Request, res: Response) {
+  public async delete(req: Request, res: Response, next: NextFunction) {
+    await validateJWT(req, res, next);
     const { id } = req.params;
 
     await this._service.delete(id);
