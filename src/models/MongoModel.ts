@@ -3,7 +3,7 @@ import { ErrorTypes } from '../errors/catalog';
 import { IModel } from '../interfaces/IModel';
 
 abstract class MongoModel<T extends object> implements IModel<T> {
-  protected _model!:Model<T>;
+  public _model!:Model<T>;
 
   constructor(model: Model<T>) {
     this._model = model;
