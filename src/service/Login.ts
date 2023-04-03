@@ -21,9 +21,6 @@ class LoginService {
     const jwt = new JWT();
     const token = await jwt.createToken(user);
 
-    const decode = await jwt.decodeToken(token);
-    console.log(decode);
-
     return { status: 200, message: token };
   }
 }
