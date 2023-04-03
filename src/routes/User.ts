@@ -1,5 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Router } from 'express';
+import validateJWT from '../auth/validateJWT';
 import UsersController from '../controllers/Users';
 import User from '../models/UserModel';
 import UsersService from '../service/Users';
@@ -13,7 +14,10 @@ const userController = new UsersController(userService);
 route
   .post('/users', (req, res) => userController.create(req, res))
   .get('/users/:id', (req, res) => userController.readOne(req, res))
-  .get('/users', (req, res) => userController.read(req, res))
+  .get('/users', (req, res, next) => {
+    validateJWT(req, res, next);
+    userController.read(req, res);
+  })
   .put('/users/:id', (req, res) => userController.update(req, res))
   .delete('/users/:id', (req, res) => userController.delete(req, res));
 
