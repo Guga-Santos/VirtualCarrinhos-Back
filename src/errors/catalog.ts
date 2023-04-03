@@ -2,6 +2,7 @@ export enum ErrorTypes {
   EntityNotFound = 'EntityNotFound',
   InvalidMongoId = 'InvalidMongoId',
   EmptyBody = 'EmptyBody',
+  FieldsMissing = 'FieldsMissing',
 }
 
 type ErrorResponseObj = {
@@ -24,6 +25,10 @@ export const errorCatalog: ErrorCatalog = {
   },
   EmptyBody: {
     error: 'You have to provide a body',
+    httpStatus: 400,
+  },
+  FieldsMissing: {
+    error: 'Some field are missing',
     httpStatus: 400,
   },
 };
