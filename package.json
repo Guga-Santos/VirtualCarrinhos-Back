@@ -53,7 +53,8 @@
   "nyc": {
     "exclude": [
       "src/models/MongoModel.ts",
-      "src/tests"
+      "src/tests",
+      "src/middlewares"
     ]
   }
 }

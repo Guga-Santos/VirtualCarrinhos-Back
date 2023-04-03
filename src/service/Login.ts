@@ -14,7 +14,7 @@ class LoginService {
     if (!user) {
       return { status: 404, message: 'User Not Found' };
     }
-    if (user?.password !== body.password) {
+    if (user.password !== body.password) {
       return { status: 401, message: 'Wrong Password' };
     }
 
